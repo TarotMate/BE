@@ -1,0 +1,7 @@
+version: "3.9"
+services:
+  backend:
+    image: "46112/deployment:latest"
+    ports:
+      - "80:8080"
+    restart: "always"

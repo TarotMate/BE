@@ -1,12 +1,9 @@
-server:
-  servlet:
-    encoding:
-      charset: utf-8
-      force: true
-  port: 8080
 spring:
   datasource:
     url: jdbc:h2:mem:test;MODE=MySQL
     username: sa
     password:
     driver-class-name: org.h2.Driver
+openai:
+  api:
+    key: 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

@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.1.5'
 	id 'io.spring.dependency-management' version '1.1.3'
+	id 'com.google.cloud.tools.jib' version '3.4.0'
 }
 
 group = 'com.tarotmate'
@@ -40,4 +41,14 @@ tasks.named('bootBuildImage') {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+jib {
+	from {
+		image = 'openjdk:17-alpine'
+	}
+	to {
+		image = '46112/deployment'
+		tags = ['latest']
+	}
 }
