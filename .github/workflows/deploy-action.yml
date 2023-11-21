@@ -45,6 +45,7 @@ jobs:
 
       - name: Build and Push Docker Image using Jib
         run: tarot/gradlew jib -Pjib.to.image=docker.io/${{ env.DOCKER_HUB_USERNAME }}/${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}
+        working-directory: ./tarot
 
       - name: Beanstalk Deploy
         uses: einaregilsson/beanstalk-deploy@v21
