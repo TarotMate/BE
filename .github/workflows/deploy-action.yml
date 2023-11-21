@@ -30,8 +30,8 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
           distribution: 'temurin'
 
-      - name: Set execute permission for gradlew
-        run: chmod +x tarot/gradlew
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
         
       - name: Build Number
         id: build-number
@@ -44,7 +44,7 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
       - name: Build and Push Docker Image using Jib
-        run: tarot/gradlew jib -Pjib.to.image=docker.io/${{ env.DOCKER_HUB_USERNAME }}/${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}
+        run: ./gradlew jib -Pjib.to.image=docker.io/${{ env.DOCKER_HUB_USERNAME }}/${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}
 
       - name: Beanstalk Deploy
         uses: einaregilsson/beanstalk-deploy@v21
