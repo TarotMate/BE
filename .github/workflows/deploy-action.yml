@@ -16,7 +16,7 @@ env:
   AWS_REGION: ap-northeast-2
   EB_ENVIRONMENT_NAME: TarotMate-env
   EB_APPLICATION_NAME: TarotMate
-  EB_DEPLOYMENT_PACKAGE: docker-compose.yml
+  EB_DEPLOYMENT_PACKAGE: tarot/docker-compose.yml
 
 jobs:
   deploy:
