@@ -7,7 +7,7 @@ on: # main branch에 push를 할 때 동작합니다!
 
 env:
   # Java
-  JAVA_VERSION: 1.15 # Java 버전을 15로 설정
+  JAVA_VERSION: 17 # Java 버전을 15로 설정
   # DockerHub
   DOCKER_HUB_USERNAME: 46112
   DOCKER_IMAGE_NAME: deployment # Docker 이미지 이름 설정
