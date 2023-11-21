@@ -1,4 +1,4 @@
-name: deploy
+name: Auto-Deploy
 
 on: # main branch에 push를 할 때 동작합니다!
   push:
@@ -30,6 +30,9 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
           distribution: 'temurin'
 
+      - name: Set execute permission for gradlew
+        run: chmod +x tarot/gradlew
+        
       - name: Build Number
         id: build-number
         run: echo "::set-output name=BUILD_NUMBER::$(date '+%d.%m.%Y.%H.%M.%S')"
