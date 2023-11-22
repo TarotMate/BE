@@ -11,19 +11,19 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class FortuneController {
 
-    @Value("${OPENAI_API_KEY:기본값}")
+    @Value("${OPENAI_API_KEY:default}")
     private String openAiApiKey;
 
     @GetMapping("/test")
     public String testAPI() {
         try {
-            log.info("testAPI() 호출됨");
-            log.info("환경 변수 OPENAI_API_KEY: {}", openAiApiKey);
-            log.info("직접 읽기 : " + System.getenv("OPENAI_API_KEY"));
-            return "테스트 API 작동 중, OPENAI_API_KEY: " + openAiApiKey;
+            log.info("testAPI() call");
+            log.info("env OPENAI_API_KEY: {}", openAiApiKey);
+            log.info("direct read : " + System.getenv("OPENAI_API_KEY"));
+            return "test API ing, OPENAI_API_KEY: " + openAiApiKey;
         } catch (Exception e) {
-            log.error("testAPI() 호출 중 오류 발생", e);
-            return "테스트 API 오류 발생";
+            log.error("testAPI() call error", e);
+            return "test API error";
         }
     }
 }
