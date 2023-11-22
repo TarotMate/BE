@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RequiredArgsConstructor
 @RestController
 public class FortuneController {
@@ -16,6 +17,20 @@ public class FortuneController {
 
     @GetMapping("/fortune")
     public ApiResult<String> readFortune() {
+
+        String apiKey = System.getenv("OPENAI_API_KEY");
+        if (apiKey != null) {
+            log.info("OPENAI_API_KEY exists: " + apiKey);
+        } else {
+            log.warn("OPENAI_API_KEY is not set in the environment variables.");
+        }
+
+        String testkey = System.getenv("testkey");
+        if (testkey != null) {
+            log.info("testkey exists: " + testkey);
+        } else {
+            log.warn("testkey is not set in the environment variables.");
+        }
 
         String result = fortuneService.getGptResponse("hello");
         return ApiResult.success(result);
