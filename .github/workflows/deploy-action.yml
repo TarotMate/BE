@@ -3,8 +3,6 @@ name: Auto-Deploy
 on: # main branch에 push를 할 때 동작합니다!
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
   workflow_dispatch:
 
 env:
