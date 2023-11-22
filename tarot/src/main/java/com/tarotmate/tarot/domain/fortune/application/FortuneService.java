@@ -6,12 +6,14 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
+@Component
 @Service
 public class FortuneService {
     @Value("${OPENAI_API_KEY}")
