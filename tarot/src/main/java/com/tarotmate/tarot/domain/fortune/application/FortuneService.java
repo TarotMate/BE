@@ -14,22 +14,23 @@ import org.springframework.web.client.RestTemplate;
 @RequiredArgsConstructor
 @Service
 public class FortuneService {
-    @Value("${OPENAI_API_KEY}")
-    private String apiKey;
+//    @Value("${OPENAI_API_KEY}")
+//    private String apiKey;
 
     private final RestTemplate restTemplate;
 
     public String getGptResponse(final String prompt) {
-        String url = "https://api.openai.com/v1/engines/gpt-3.5-turbo-1106/completions";
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.setBearerAuth(apiKey);
-
-        String requestBody = "{\"prompt\": \"" + prompt + "\", \"max_tokens\": 150}";
-        HttpEntity<String> request = new HttpEntity<>(requestBody, headers);
-
-        ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
-        return response.getBody();
+//        String url = "https://api.openai.com/v1/engines/gpt-3.5-turbo-1106/completions";
+//
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.APPLICATION_JSON);
+//        headers.setBearerAuth(apiKey);
+//
+//        String requestBody = "{\"prompt\": \"" + prompt + "\", \"max_tokens\": 150}";
+//        HttpEntity<String> request = new HttpEntity<>(requestBody, headers);
+//
+//        ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
+//        return response.getBody();
+        return "test";
     }
 }
