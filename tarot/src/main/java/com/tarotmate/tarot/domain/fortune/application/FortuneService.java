@@ -14,8 +14,8 @@ import org.springframework.web.client.RestTemplate;
 @RequiredArgsConstructor
 @Service
 public class FortuneService {
-//    @Value("${OPENAI_API_KEY}")
-//    private String apiKey;
+    @Value("${OPENAI_API_KEY}")
+    private String apiKey;
 
     private final RestTemplate restTemplate;
 
@@ -31,6 +31,6 @@ public class FortuneService {
 //
 //        ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
 //        return response.getBody();
-        return "test";
+        return apiKey;
     }
 }
