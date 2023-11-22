@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
-/*
+
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 @Service
@@ -33,13 +33,4 @@ public class FortuneService {
 //        return response.getBody();
         return apiKey;
     }
-}
-*/
-
-public class FortuneService {
-
-    public String getGptResponse(final String prompt) {
-        return "test";
-    }
-
 }
