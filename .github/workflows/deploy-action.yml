@@ -14,8 +14,8 @@ env:
   DOCKER_IMAGE_TAG: latest # Docker 이미지 태그 설정
   # AWS & Elastic Bean Stalk
   AWS_REGION: ap-northeast-2
-  EB_ENVIRONMENT_NAME: TarotMate-env
-  EB_APPLICATION_NAME: TarotMate
+  EB_ENVIRONMENT_NAME: Tarot-Deployment-env
+  EB_APPLICATION_NAME: Tarot-Deployment
   EB_DEPLOYMENT_PACKAGE: tarot/docker-compose.yml
 
 jobs:
@@ -46,8 +46,6 @@ jobs:
       - name: Build and Push Docker Image using Jib
         run: ./gradlew jib -Pjib.to.image=docker.io/${{ env.DOCKER_HUB_USERNAME }}/${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}
         working-directory: ./tarot
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
       - name: Beanstalk Deploy
         uses: einaregilsson/beanstalk-deploy@v21
