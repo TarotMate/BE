@@ -1,23 +1,28 @@
 package com.tarotmate.tarot.domain.fortune.ui;
 
-import com.tarotmate.tarot.domain.fortune.application.FortuneService;
-import com.tarotmate.tarot.global.utils.ApiResult;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
 @RestController
+@Slf4j
 public class FortuneController {
 
-    private final FortuneService fortuneService;
+    @Value("${OPENAI_API_KEY:기본값}")
+    private String openAiApiKey;
 
-    @GetMapping("/fortune")
-    @ResponseStatus(HttpStatus.OK)
-    public ApiResult<?> readArticles() {
-        String response = fortuneService.getGptResponse("hello World!");
-        return ApiResult.success(response);
+    @GetMapping("/test")
+    public String testAPI() {
+        try {
+            log.info("testAPI() 호출됨");
+            log.info("환경 변수 OPENAI_API_KEY: {}", openAiApiKey);
+            return "테스트 API 작동 중, OPENAI_API_KEY: " + openAiApiKey;
+        } catch (Exception e) {
+            log.error("testAPI() 호출 중 오류 발생", e);
+            return "테스트 API 오류 발생";
+        }
     }
 }

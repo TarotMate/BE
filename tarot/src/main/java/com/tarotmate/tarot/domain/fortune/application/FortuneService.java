@@ -6,17 +6,15 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
-
+/*
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-@Component
 @Service
 public class FortuneService {
-    @Value("${OPENAI_API_KEY}")
+    @Value("${openai.accessKey}")
     private String apiKey;
 
     private final RestTemplate restTemplate;
@@ -33,10 +31,15 @@ public class FortuneService {
 //
 //        ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
 //        return response.getBody();
-
-//        String endpoint = System.getenv("OPENAI_API_KEY");
-
-
         return apiKey;
     }
+}
+*/
+
+public class FortuneService {
+
+    public String getGptResponse(final String prompt) {
+        return "test";
+    }
+
 }
