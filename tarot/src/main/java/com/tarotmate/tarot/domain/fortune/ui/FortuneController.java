@@ -19,6 +19,7 @@ public class FortuneController {
         try {
             log.info("testAPI() 호출됨");
             log.info("환경 변수 OPENAI_API_KEY: {}", openAiApiKey);
+            log.info("직접 읽기 : " + System.getenv("OPENAI_API_KEY"));
             return "테스트 API 작동 중, OPENAI_API_KEY: " + openAiApiKey;
         } catch (Exception e) {
             log.error("testAPI() 호출 중 오류 발생", e);
