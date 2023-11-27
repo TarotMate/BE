@@ -31,6 +31,6 @@ public class FortuneService {
 //
 //        ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
 //        return response.getBody();
-        return apiKey;
+        return "success";
     }
 }
