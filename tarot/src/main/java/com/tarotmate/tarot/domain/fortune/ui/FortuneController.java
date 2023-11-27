@@ -18,20 +18,6 @@ public class FortuneController {
     @GetMapping("/fortune")
     public ApiResult<String> readFortune() {
 
-        String apiKey = System.getenv("OPENAI_API_KEY");
-        if (apiKey != null) {
-            log.info("OPENAI_API_KEY exists: " + apiKey);
-        } else {
-            log.warn("OPENAI_API_KEY is not set in the environment variables.");
-        }
-
-        String testkey = System.getenv("testkey");
-        if (testkey != null) {
-            log.info("testkey exists: " + testkey);
-        } else {
-            log.warn("testkey is not set in the environment variables.");
-        }
-
         String result = fortuneService.getGptResponse("hello");
         return ApiResult.success(result);
     }

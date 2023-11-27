@@ -5,6 +5,7 @@ server:
       force: true
   port: 8080
 spring:
-  profiles:
-    active:
-      - local
+  config:
+    import: optional:aws-parameterstore:/config/tarotmate
+#  profiles:
+#    active: local

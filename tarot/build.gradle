@@ -33,7 +33,9 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.h2database:h2' // local
-	implementation 'com.coveo:spring-boot-parameter-store-integration:1.1.2'
+	// parameter store
+	implementation(platform("io.awspring.cloud:spring-cloud-aws-dependencies:3.0.0"))
+	implementation("io.awspring.cloud:spring-cloud-aws-starter-parameter-store")
 }
 
 tasks.named('bootBuildImage') {

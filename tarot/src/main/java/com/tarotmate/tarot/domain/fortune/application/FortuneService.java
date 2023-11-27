@@ -14,7 +14,7 @@ import org.springframework.web.client.RestTemplate;
 @RequiredArgsConstructor
 @Service
 public class FortuneService {
-    @Value("${openai.accessKey}")
+    @Value("${openai-api-key}")
     private String apiKey;
 
     private final RestTemplate restTemplate;
