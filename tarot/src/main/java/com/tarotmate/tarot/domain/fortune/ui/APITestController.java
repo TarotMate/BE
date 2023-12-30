@@ -1,6 +1,7 @@
 package com.tarotmate.tarot.domain.fortune.ui;
 
 import com.tarotmate.tarot.domain.fortune.application.APITestService;
+import com.tarotmate.tarot.domain.fortune.application.FortuneResponseDTO;
 import com.tarotmate.tarot.global.utils.ApiResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,8 +17,8 @@ public class APITestController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/api-test")
-    public ApiResult<String> returnDefaultResponse() {
-        final String result = apiTestService.getDefaultResponse();
+    public ApiResult<FortuneResponseDTO> returnDefaultResponse() {
+        final FortuneResponseDTO result = apiTestService.getDefaultResponse();
         return ApiResult.success(result);
     }
 }
