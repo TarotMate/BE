@@ -17,8 +17,8 @@ public class ApiResult<T> {
         return new ApiResult<>(true, response, null);
     }
 
-    public static ApiResult<?> error(final String message, final HttpStatus status) {
-        return new ApiResult<>(false, null, new ApiError(message, status.value()));
+    public static ApiResult<?> error(final String message) {
+        return new ApiResult<>(false, null, new ApiError(message));
     }
 
     @Getter
@@ -26,6 +26,5 @@ public class ApiResult<T> {
     @AllArgsConstructor
     public static class ApiError {
         private final String message;
-        private final int status;
     }
 }

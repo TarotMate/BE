@@ -49,13 +49,13 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ApiResult<?> nullObjectError(final NullPointerException e) {
         log.error(e.getMessage(), e);
-        return ApiResult.error(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        return ApiResult.error(e.getMessage());
     }
 
     @ExceptionHandler(RuntimeException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ApiResult<?> unknownServerError(final RuntimeException e) {
         log.error(e.getMessage(), e);
-        return ApiResult.error(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        return ApiResult.error(e.getMessage());
     }
 }

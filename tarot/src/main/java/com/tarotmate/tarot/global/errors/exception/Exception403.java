@@ -11,7 +11,7 @@ public class Exception403 extends RuntimeException {
     }
 
     public ApiResult<?> body() {
-        return ApiResult.error(getMessage(), HttpStatus.FORBIDDEN);
+        return ApiResult.error(getMessage());
     }
 
     public HttpStatus status() {

@@ -13,7 +13,7 @@ public class Exception400 extends RuntimeException {
     }
 
     public ApiResult<?> body() {
-        return ApiResult.error(getMessage(), HttpStatus.BAD_REQUEST);
+        return ApiResult.error(getMessage());
     }
 
     public HttpStatus status() {
