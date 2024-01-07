@@ -1,4 +1,4 @@
-package com.tarotmate.tarot.domain.fortune.application;
+package com.tarotmate.tarot.domain.fortune.application.model;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -17,7 +17,7 @@ public class FortuneResponseDTO {
 
     @Getter
     @Builder
-    static class TarotCardDTO {
+    public static class TarotCardDTO {
         private int number;
         private String name;
         private String image;
@@ -25,7 +25,7 @@ public class FortuneResponseDTO {
 
     @Getter
     @Builder
-    static class FortuneDTO {
+    public static class FortuneDTO {
         private String label;
         private String value;
         private List<FortuneDescriptionDTO> descriptions;
@@ -33,7 +33,7 @@ public class FortuneResponseDTO {
 
     @Getter
     @Builder
-    static class FortuneDescriptionDTO {
+    public static class FortuneDescriptionDTO {
         private String title;
         private String subtitle;
         private List<String> cardDescriptions;

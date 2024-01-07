@@ -1,4 +1,4 @@
-package com.tarotmate.tarot.domain.fortune.application;
+package com.tarotmate.tarot.domain.fortune.application.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

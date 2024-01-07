@@ -1,5 +1,6 @@
 package com.tarotmate.tarot.domain.fortune.application;
 
+import com.tarotmate.tarot.domain.fortune.application.model.FortuneResponseDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
