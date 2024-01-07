@@ -27,13 +27,13 @@ import static com.tarotmate.tarot.global.utils.prompt.FortunePrompt.STAR_STORY;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 @Service
-public class FortuneService {
+public class RunFortuneService {
     @Value("${openai-api-key:defaultValue}")
     private String apiKey;
 
     private final RestTemplate restTemplate;
 
-    public String getTodayFortune(final TarotRequest request) {
+    public String getTarotResult(final TarotRequest request) {
 
     // 1. Parameter값 세팅
         if (Objects.equals(apiKey, "defaultValue")) throw new Exception500(ErrorCode.ER01);
