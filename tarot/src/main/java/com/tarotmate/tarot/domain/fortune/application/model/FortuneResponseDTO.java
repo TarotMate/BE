@@ -2,13 +2,11 @@ package com.tarotmate.tarot.domain.fortune.application.model;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 import java.util.List;
-
+// /api-test만 사용하고 있음. 삭제 예정 TODO
 @Getter
 @Builder
-@RequiredArgsConstructor
 public class FortuneResponseDTO {
     private final List<TarotCardDTO> tarotCards;
     private final List<FortuneDTO> fortunes;

@@ -18,9 +18,12 @@ public enum ErrorCode {
     // OPENAI API 응답값 json object 파싱 실패
     public static final String ER05 = "ER05";
 
-    // 타로페이지에서 쿼리스트링으로 받은 theme가 잘못되었을 때
+    // 타로페이지에서 받은 theme가 잘못되었을 때
     public static final String ER06 = "ER06";
 
-    // 타로페이지에서 쿼리스트링으로 받은 fortuneType이 잘못되었을 때
+    // 타로페이지에서 받은 fortuneType이 잘못되었을 때
     public static final String ER07 = "ER07";
+
+    // GPT 응답값 파싱 실패
+    public static final String ER08 = "ER08";
 }

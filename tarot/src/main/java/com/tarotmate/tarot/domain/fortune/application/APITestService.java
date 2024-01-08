@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 
+
+// /api-test만 사용함
 @Service
 public class APITestService {
 

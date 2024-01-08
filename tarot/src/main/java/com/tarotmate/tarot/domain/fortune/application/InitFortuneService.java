@@ -1,15 +1,11 @@
 package com.tarotmate.tarot.domain.fortune.application;
 
-import com.tarotmate.tarot.domain.fortune.application.model.TarotPageResponse;
-import com.tarotmate.tarot.global.errors.exception.ErrorCode;
-import com.tarotmate.tarot.global.errors.exception.Exception400;
-import com.tarotmate.tarot.global.utils.InitPage;
+import com.tarotmate.tarot.domain.fortune.application.model.InitialPageResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
-import java.util.Objects;
 
 
 @Transactional(readOnly = true)
@@ -17,6 +13,12 @@ import java.util.Objects;
 @Service
 public class InitFortuneService {
 
+    public InitialPageResponse getTarotPage() {
+        return InitialPageResponse.ofEntity();
+    }
+
+
+/*
     public TarotPageResponse getTarotPage(String fortuneType, String theme){
         final TarotPageResponse tarotPage = TarotPageResponse.getDefaultTarotPage();
 
@@ -77,4 +79,5 @@ public class InitFortuneService {
 
         return tarotPage;
     }
+ */
 }
