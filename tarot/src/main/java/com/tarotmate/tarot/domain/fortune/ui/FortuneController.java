@@ -34,9 +34,9 @@ public class FortuneController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/init")
-    public InitialPageResponse returnInitialPage() {
+    public ApiResult<InitialPageResponse> returnInitialPage() {
 
-        return initFortuneService.getTarotPage();
+        return ApiResult.success(initFortuneService.getTarotPage());
     }
 /*
     @ResponseStatus(HttpStatus.OK)
