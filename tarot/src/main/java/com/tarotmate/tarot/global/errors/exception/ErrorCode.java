@@ -30,6 +30,6 @@ public enum ErrorCode {
     // GPT가 생성한 타로 해석의 개수가 사용자가 제공한 description 개수와 다름
     public static final String ER09 = "ER09";
 
-    // 초기데이터 매핑 실패
+    // 시작 페이지의 초기데이터 매핑 실패
     public static final String ER10 = "ER10";
 }
