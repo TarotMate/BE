@@ -13,6 +13,7 @@ public class FortuneResponse {
 
     @Data
     public static class Card {
+
         @JsonProperty("cardDescription")
         private String cardDescription;
 

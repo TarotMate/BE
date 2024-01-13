@@ -70,6 +70,20 @@ public class ReadFortuneService {
             throw new Exception500(ErrorCode.ER08);
         }
 
+    // 6. 응답값 내의 cardDescription 업데이트
+    final List<FortuneResponse.Card> cards = fortuneResponse.getFortune();
+    final List<String> cardDescriptions = request.getCardDescriptions();
+
+    final int cardSize = cards.size();
+    if (cardSize != cardDescriptions.size()) throw new Exception500(ErrorCode.ER09);
+
+    for(int i = 0; i < cardSize; i++) {
+        final FortuneResponse.Card card = cards.get(i);
+        final String newDescription = cardDescriptions.get(i);
+        card.setCardDescription(newDescription);
+    }
+    // 7. 응답값 내의 imageUrl 업데이트
+
 
         return fortuneResponse;
     }

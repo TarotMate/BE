@@ -26,4 +26,7 @@ public enum ErrorCode {
 
     // GPT 응답값 파싱 실패
     public static final String ER08 = "ER08";
+
+    // GPT가 생성한 타로 해석의 개수가 사용자가 제공한 description 개수와 다름
+    public static final String ER09 = "ER09";
 }
