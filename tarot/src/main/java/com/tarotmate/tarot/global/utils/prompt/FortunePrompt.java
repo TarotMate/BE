@@ -13,7 +13,7 @@ import java.util.Objects;
 public class FortunePrompt {
 
     public static String getBasicSystemPrompt(){
-        return "You are very good at interpreting tarot cards. Please feel free to interpret the user's situation regarding the tarot cards. Your customers are Korean, so please answer in Korean. Please speak informally.";
+        return "You are very good at interpreting tarot cards. Please feel free to interpret the user's situation regarding the tarot cards. Your customers are Korean, so please answer in Korean language only. Translate any other language to the Korean language whenever possible";
     }
 
     public static String getFortuneTypeInfo(final String fortuneType, final String theme){
