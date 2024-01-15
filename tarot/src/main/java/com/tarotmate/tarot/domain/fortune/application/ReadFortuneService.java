@@ -102,31 +102,34 @@ public class ReadFortuneService {
         requestBody.put("response_format", type);
 
         final JSONArray messages = new JSONArray();
-        final JSONObject systemMessage = new JSONObject(); //시스템 프롬프트
         final JSONObject userMessage = new JSONObject(); //유저 프롬프트
 
         // 3. 프롬프트 생성 & RequestBody에 삽입
-        systemMessage.put("role", "system");
-        systemMessage.put("content", FortunePrompt.getBasicSystemPrompt()); //기본적인 타로 시스템 프롬프트
-        messages.add(systemMessage);
+        final JSONObject basicSystemMessage = new JSONObject();
+        basicSystemMessage.put("role", "system");
+        basicSystemMessage.put("content", FortunePrompt.getBasicSystemPrompt()); //기본적인 타로 시스템 프롬프트
+        messages.add(basicSystemMessage);
 
-        systemMessage.put("role", "system");
-        systemMessage.put("content", FortunePrompt.getFortuneTypeInfo(request.getFortuneType(), request.getTheme())); //fortuneType, theme에 따라 달라지는 시스템 프롬프트
-        messages.add(systemMessage);
+        final JSONObject whatWantToKnow = new JSONObject();
+        whatWantToKnow.put("role", "system");
+        whatWantToKnow.put("content", FortunePrompt.getFortuneTypeInfo(request.getFortuneType(), request.getTheme())); //fortuneType, theme에 따라 달라지는 시스템 프롬프트
+        messages.add(whatWantToKnow);
 
-        systemMessage.put("role", "system");
-        systemMessage.put("content", FortunePrompt.getReturnTypeSetting()); // return Type Json으로 지정하는 시스템 프롬프트
-        messages.add(systemMessage);
-
-        systemMessage.put("role", "system");
-        systemMessage.put("content", FortunePrompt.getAdditionalExplain()); // return하는 필드값에 대한 부가 설명
-        messages.add(systemMessage);
+        final JSONObject jsonExplainMessage = new JSONObject(); //시스템 프롬프트
+        jsonExplainMessage.put("role", "system");
+        jsonExplainMessage.put("content", FortunePrompt.getAdditionalExplain()); // return하는 필드값에 대한 부가 설명
+        messages.add(jsonExplainMessage);
 
         final String userPrompt = FortunePrompt.createUserPrompt(tarotCards, request.getCardDescriptions());
 
         userMessage.put("role", "user");
         userMessage.put("content", userPrompt); //유저가 뽑은 카드들에 대한 정보를 제공하는 유저 프롬프트
         messages.add(userMessage);
+
+        final JSONObject languageSettingMessage = new JSONObject();
+        languageSettingMessage.put("role", "system");
+        languageSettingMessage.put("content", FortunePrompt.responseLanguageSetting());
+        messages.add(languageSettingMessage);
 
         requestBody.put("messages", messages);
 
