@@ -13,26 +13,26 @@ import java.util.Objects;
 public class FortunePrompt {
 
     public static String getBasicSystemPrompt(){
-        return "You are very good at interpreting tarot cards. Please feel free to interpret the user's situation regarding the tarot cards.";
+        return "You are very good at interpreting tarot cards. Please freely interpret the user's situation regarding the tarot cards.";
     }
 
     public static String getFortuneTypeInfo(final String fortuneType, final String theme){
         switch (fortuneType) {
             case InitPage.TODAY_TAROT -> {
-                return (Objects.equals("하루의 마무리", theme)) ? "The day has ended today. Users want to know today's lessons and preparations for tomorrow. Users will provide additional information about exactly what they want to know." : "Predict the user’s today’s fortune using tarot cards. Users will provide additional information about exactly what they want to know.";
+                return (Objects.equals("하루의 마무리", theme)) ? "I want to know what I learned from today, what I'm grateful for that I hadn't thought about, and what I can do to have a better tomorrow." : "I want to predict how the day will go.";
             }
             case InitPage.LOVE_TAROT -> {
-                if (Objects.equals("이별 후의 회복", theme)) return "The user is currently separated from his or her lover.";
+                if (Objects.equals("이별 후의 회복", theme)) return "I recently broke up with my partner. I wonder what I should do for the future.";
                 else if (Objects.equals("관계의 발전", theme))
-                    return "The user is currently in a romantic relationship with someone. Users want to know the partner’s feelings.";
-                else return "The user does not currently have a romantic partner. They want to find new love.";
+                    return "There's someone I've been interested in recently. I would like to see a fortune telling about my relationship with that person.";
+                else return "I want to find new love.";
             }
             case InitPage.TAROT_OF_THE_MONTH -> {
                 if (Objects.equals("개인적 성장과 발전", theme))
-                    return "Users want to know what to do for personal growth and development for the next month";
+                    return "I'm wondering what I should do this month for my personal growth and development.";
                 else if (Objects.equals("월간 관계 동향", theme))
-                    return "Users would like to predict human relationships for the next month.";
-                else return "Users want to know things like major events for the next month.";
+                    return "I'm curious about how my relationships with other people will go this month.";
+                else return "I want to know and react to what major events will occur this month.";
             }
             default -> throw new Exception400(ErrorCode.ER07);
         }
@@ -70,7 +70,7 @@ public class FortunePrompt {
 //    }
 
     public static String getAdditionalExplain() {
-        return "Below is an explanation of the json key value as an example. fortune is an array containing information for each card. cardName is literally the name of the tarot card drawn by the user. starRating indicates the positivity of the interpretation as a star. The worse the interpretation, the closer it will be to 1, and the more positive the interpretation, the closer it will be to 5. The star rating is an integer. shortComment is a one-line summary of the interpretation. detail is a detailed interpretation of the card. hashTags contains the keywords that the card represents in an array of hashtags.";
+        return "The following is an explanation of the JSON key you must give when responding. fortune is an array containing interpretations for each card. cardName is literally the name of the tarot card drawn by the user. starRating indicates the positivity of the interpretation as a star. The worse the interpretation, the closer it will be to 1, and the more positive the interpretation, the closer it will be to 5. The star rating is an integer. shortComment is a one-line summary of the detail. detail is a detailed interpretation of the card. hashTags contains the keywords that the card represents in an array of hashtags.";
     }
 
 
@@ -84,7 +84,7 @@ public class FortunePrompt {
         // 메시지 생성
         final StringBuilder promptBuilder = new StringBuilder("제가 뽑은 카드는 다음과 같습니다:\n");
         for (int i = 0; i < selectedCards.size(); i++) {
-            promptBuilder.append(String.format("%d. 저는 이 카드를 통해서 '%s'에 대한 힌트를 얻고 싶습니다. - %s\n",
+            promptBuilder.append(String.format("%d. 저는 이 카드를 뽑을 때 '%s'에 대한 정보를 얻고 싶다고 생각했습니다. - %s\n",
                     i + 1, cardDescriptions.get(i), selectedCards.get(i).getName()));
         }
         return promptBuilder.toString();

@@ -122,10 +122,10 @@ public class ReadFortuneService {
         basicSystemMessage.put("content", FortunePrompt.getBasicSystemPrompt()); //기본적인 타로 시스템 프롬프트
         messages.add(basicSystemMessage);
 
-        final JSONObject whatWantToKnow = new JSONObject();
-        whatWantToKnow.put("role", "system");
-        whatWantToKnow.put("content", FortunePrompt.getFortuneTypeInfo(request.getFortuneType(), request.getTheme())); //fortuneType, theme에 따라 달라지는 시스템 프롬프트
-        messages.add(whatWantToKnow);
+        final JSONObject whatUserWantToKnow = new JSONObject();
+        whatUserWantToKnow.put("role", "user");
+        whatUserWantToKnow.put("content", FortunePrompt.getFortuneTypeInfo(request.getFortuneType(), request.getTheme())); //fortuneType, theme에 따라 달라지는 시스템 프롬프트
+        messages.add(whatUserWantToKnow);
 
         final JSONObject jsonExplainMessage = new JSONObject(); //시스템 프롬프트
         jsonExplainMessage.put("role", "system");
