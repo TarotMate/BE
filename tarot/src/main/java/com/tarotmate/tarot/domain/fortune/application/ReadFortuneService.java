@@ -1,6 +1,5 @@
 package com.tarotmate.tarot.domain.fortune.application;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tarotmate.tarot.domain.fortune.application.model.FortuneResponse;
 import com.tarotmate.tarot.domain.fortune.application.model.TarotRequest;
@@ -16,9 +15,6 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -41,6 +37,8 @@ public class ReadFortuneService {
 
     private final RestTemplate restTemplate;
     private final ObjectMapper objectMapper;
+    private final OpenAIResponseMapper openAIResponseMapper;
+
 
     @SneakyThrows
     public FortuneResponse getTarotResult(final TarotRequest request) {
@@ -63,7 +61,6 @@ public class ReadFortuneService {
         if (!response.getStatusCode().is2xxSuccessful()) throw new Exception500(ErrorCode.ER04);
 
     // 4. 응답값 전처리
-        //final String contentMessage = extractMessageFromResponse(response.getBody());
         final String json = response.getBody();
         final OpenAIResponse openAIResponse = objectMapper.readValue(json, OpenAIResponse.class);
 
@@ -71,34 +68,27 @@ public class ReadFortuneService {
         final Content content = objectMapper.readValue(firstChoice.getMessage().getContent(), Content.class);
 
     // 5. 응답값 DTO 파싱
-        final OpenAIResponseMapper mapper = Mappers.getMapper(OpenAIResponseMapper.class);
-        final FortuneResponse fortuneResponse = mapper.toFortuneResponse(content);
+        //final OpenAIResponseMapper mapper = Mappers.getMapper(OpenAIResponseMapper.class);
+        final FortuneResponse fortuneResponse = openAIResponseMapper.toFortuneResponse(content);
 
-//final ObjectMapper mapper = new ObjectMapper();
-//        final FortuneResponse fortuneResponse;
-//        try {
-//            fortuneResponse = mapper.readValue(contentMessage, FortuneResponse.class);
-//        } catch (JsonProcessingException e) {
-//            throw new Exception500(ErrorCode.ER08);
-//        }
 
     // 6. 응답값 내의 cardDescription 업데이트
-    final List<FortuneResponse.Card> cards = fortuneResponse.getFortune();
-    final List<String> cardDescriptions = request.getCardDescriptions();
+        final List<FortuneResponse.Card> cards = fortuneResponse.getFortune();
+        final List<String> cardDescriptions = request.getCardDescriptions();
 
-    final int cardSize = cards.size();
-    if (cardSize != cardDescriptions.size()) throw new Exception500(ErrorCode.ER09);
+        final int cardSize = cards.size();
+        if (cardSize != cardDescriptions.size()) throw new Exception500(ErrorCode.ER09);
 
-    for(int i = 0; i < cardSize; i++) {
-        final FortuneResponse.Card card = cards.get(i);
-        final String newDescription = cardDescriptions.get(i);
-        card.setCardDescription(newDescription);
-    }
+        for(int i = 0; i < cardSize; i++) {
+            final FortuneResponse.Card card = cards.get(i);
+            final String newDescription = cardDescriptions.get(i);
+            card.setCardDescription(newDescription);
+        }
     // 7. 응답값 내의 imageUrl 업데이트
 
 
-        return fortuneResponse;
-    }
+            return fortuneResponse;
+        }
 
     private HttpEntity<String> getRequestEntity(final TarotRequest request, final List<TarotCard> tarotCards) {
         final HttpHeaders headers = new HttpHeaders();

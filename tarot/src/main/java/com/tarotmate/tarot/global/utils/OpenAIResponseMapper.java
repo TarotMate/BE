@@ -6,8 +6,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tarotmate.tarot.domain.fortune.application.model.FortuneResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingConstants;
 
-@Mapper
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface OpenAIResponseMapper {
     @Mapping(target = "fortune", source = "content.fortune")
     FortuneResponse toFortuneResponse(Content content);
