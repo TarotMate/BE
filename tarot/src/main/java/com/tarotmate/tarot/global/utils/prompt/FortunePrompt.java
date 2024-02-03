@@ -34,7 +34,7 @@ public class FortunePrompt {
                     return "I'm curious about how my relationships with other people will go this month.";
                 else return "I want to know and react to what major events will occur this month.";
             }
-            default -> throw new Exception400(ErrorCode.ER07);
+            default -> throw new Exception400(ErrorCode.ER07.getCode());
         }
     }
 

@@ -44,7 +44,7 @@ public class ReadFortuneService {
     public FortuneResponse getTarotResult(final TarotRequest request) {
 
     // 1. 파라미터값 세팅
-        if (Objects.equals(apiKey, "defaultValue")) throw new Exception500(ErrorCode.ER01);
+        if (Objects.equals(apiKey, "defaultValue")) throw new Exception500(ErrorCode.ER01.getCode());
 
         final List<Integer> cardIndexes = request.getSelectedCardNumbers();
         final List<TarotCard> tarotCards = cardIndexes.stream()
@@ -58,7 +58,7 @@ public class ReadFortuneService {
 
     // 3. RestTemplate을 이용한 API 요청
         final var response = restTemplate.postForEntity(defaultUrl, entity, String.class);
-        if (!response.getStatusCode().is2xxSuccessful()) throw new Exception500(ErrorCode.ER04);
+        if (!response.getStatusCode().is2xxSuccessful()) throw new Exception500(ErrorCode.ER04.getCode());
 
     // 4. 응답값 전처리
         final String json = response.getBody();
@@ -77,7 +77,7 @@ public class ReadFortuneService {
         final List<String> cardDescriptions = request.getCardDescriptions();
 
         final int cardSize = cards.size();
-        if (cardSize != cardDescriptions.size()) throw new Exception500(ErrorCode.ER09);
+        if (cardSize != cardDescriptions.size()) throw new Exception500(ErrorCode.ER09.getCode());
 
         for(int i = 0; i < cardSize; i++) {
             final FortuneResponse.Card card = cards.get(i);

@@ -50,6 +50,6 @@ public enum TarotCard {
                 return card;
             }
         }
-        throw new Exception404(ErrorCode.ER02);
+        throw new Exception404(ErrorCode.ER02.getCode());
     }
 }

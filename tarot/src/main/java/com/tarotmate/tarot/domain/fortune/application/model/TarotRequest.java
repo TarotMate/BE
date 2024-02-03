@@ -1,6 +1,5 @@
 package com.tarotmate.tarot.domain.fortune.application.model;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

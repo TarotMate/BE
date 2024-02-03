@@ -24,7 +24,7 @@ public class InitFortuneService {
         try {
             initialPageResponse = initialPageLoader.loadInitialData();
         } catch (final IOException e) {
-            throw new Exception500(ErrorCode.ER10);
+            throw new Exception500(ErrorCode.ER10.getCode());
         }
         return initialPageResponse;
     }
