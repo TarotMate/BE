@@ -1,6 +1,6 @@
 package com.tarotmate.tarot;
 
-import com.tarotmate.tarot.domain.user.application.EmailValidator;
+import com.tarotmate.tarot.global.validation.EmailValidator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

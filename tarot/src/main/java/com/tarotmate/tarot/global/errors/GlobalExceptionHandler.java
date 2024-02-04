@@ -10,9 +10,15 @@ import com.tarotmate.tarot.global.utils.ApiResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 
 @Slf4j
@@ -43,6 +49,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> serverError(final Exception500 e) {
         log.error(e.getMessage(), e);
         return new ResponseEntity<>(e.body(), e.status());
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ApiResult<?>> validationError(final MethodArgumentNotValidException e) {
+        return ResponseEntity.badRequest().body(ApiResult.error(e.getAllErrors().get(0).getDefaultMessage()));
     }
 
     @ExceptionHandler(NullPointerException.class)

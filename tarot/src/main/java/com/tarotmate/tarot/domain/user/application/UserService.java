@@ -19,7 +19,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public void userSignUp(final UserRegistrationInfo userInfo) {
+    public void signUp(final UserRegistrationInfo userInfo) {
         final String requestEmail = userInfo.getEmail();
         if (Objects.nonNull(userRepository.findByEmail(requestEmail))) throw new Exception400(ErrorCode.ER11.getCode());
 
