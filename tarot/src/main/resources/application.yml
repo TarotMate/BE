@@ -7,5 +7,16 @@ server:
 spring:
   config:
     import: optional:aws-parameterstore:/config/tarotmate
+  mail:
+    host: smtp.naver.com
+    port: 465
+    username: tarotmatekr@naver.com
+    password: _kU3#Xt6i^F~x4
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.ssl.enable: true
+      mail.smtp.ssl.trust: smtp.naver.com
+      mail.smtp.starttls.enable: true
+
 #  profiles:
 #    active: local

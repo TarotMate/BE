@@ -5,11 +5,14 @@ import com.tarotmate.tarot.global.errors.exception.Exception400;
 import com.tarotmate.tarot.global.errors.exception.Exception401;
 import com.tarotmate.tarot.global.errors.exception.Exception403;
 import com.tarotmate.tarot.global.errors.exception.Exception404;
+import com.tarotmate.tarot.global.errors.exception.Exception409;
 import com.tarotmate.tarot.global.errors.exception.Exception500;
 import com.tarotmate.tarot.global.utils.ApiResult;
+import jakarta.mail.AuthenticationFailedException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.MailSendException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -45,6 +48,11 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(e.body(), e.status());
     }
 
+    @ExceptionHandler(Exception409.class)
+    public ResponseEntity<?> conflict(final Exception409 e) {
+        return new ResponseEntity<>(e.body(), e.status());
+    }
+
     @ExceptionHandler(Exception500.class)
     public ResponseEntity<?> serverError(final Exception500 e) {
         log.error(e.getMessage(), e);
@@ -52,16 +60,23 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<ApiResult<?>> validationError(final MethodArgumentNotValidException e) {
         return ResponseEntity.badRequest().body(ApiResult.error(e.getAllErrors().get(0).getDefaultMessage()));
     }
+    @ExceptionHandler(AuthenticationFailedException.class)
+    public ResponseEntity<ApiResult<?>> mailError(final AuthenticationFailedException e) {
+        return ResponseEntity.internalServerError().body(ApiResult.error(e.getMessage()));
+    }
+
+    @ExceptionHandler(MailSendException.class)
+    public ResponseEntity<ApiResult<?>> mailConfirmError(final MailSendException e) {
+        return ResponseEntity.internalServerError().body(ApiResult.error(e.getMessage()));
+    }
 
     @ExceptionHandler(NullPointerException.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ApiResult<?> nullObjectError(final NullPointerException e) {
+    public ResponseEntity<ApiResult<?>> nullObjectError(final NullPointerException e) {
         log.error(e.getMessage(), e);
-        return ApiResult.error(e.getMessage());
+        return ResponseEntity.internalServerError().body(ApiResult.error(e.getMessage()));
     }
 
     @ExceptionHandler(RuntimeException.class)

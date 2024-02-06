@@ -7,19 +7,21 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 
 @NoArgsConstructor
 @Entity
-public class Users {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
+    @Getter
     @Email
     @Column(nullable = false)
     private String email;
@@ -34,10 +36,17 @@ public class Users {
     @Column
     private UserRole role = UserRole.USER;
 
+    @Column
+    private boolean enabled = false;
+
     @Builder
-    public Users(final String email, final String password, final String nickname) {
+    public User(final String email, final String password, final String nickname) {
         this.email = email;
         this.password = password;
         this.nickname = nickname;
+    }
+
+    public void authenticationSuccess() {
+        enabled = true;
     }
 }
