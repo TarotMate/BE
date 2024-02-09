@@ -17,6 +17,5 @@ spring:
       mail.smtp.ssl.enable: true
       mail.smtp.ssl.trust: smtp.naver.com
       mail.smtp.starttls.enable: true
-
-#  profiles:
-#    active: local
+  profiles:
+    active: prod
