@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:mysql://database-tarotmate.cdrwurpkzw0o.ap-northeast-2.rds.amazonaws.com:3306/ebdb
+    username: ${db-username}
+    password: ${db-pw}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+        ddl-auto: update
