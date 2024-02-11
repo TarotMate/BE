@@ -11,7 +11,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,6 +43,13 @@ public class UserController {
     @GetMapping("/regitrationConfirm")
     public ApiResult<?> confirmRegistration(@RequestParam("token") final String token) {
         userService.validateVerificationTokenAndActivateUser(token);
+        return ApiResult.success(null);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @DeleteMapping("/user/{userId}")
+    public ApiResult<?> deleteUser(@PathVariable final Long userId) {
+        userService.deleteUserWithTokens(userId);
         return ApiResult.success(null);
     }
 }

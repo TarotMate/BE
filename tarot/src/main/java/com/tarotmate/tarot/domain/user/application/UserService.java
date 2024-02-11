@@ -66,4 +66,10 @@ public class UserService implements IUserService {
         user.authenticationSuccess();
         userRepository.save(user);
     }
+
+    @Override
+    public void deleteUserWithTokens(final Long userId) {
+        tokenRepository.deleteByUserId(userId);
+        userRepository.deleteById(userId);
+    }
 }

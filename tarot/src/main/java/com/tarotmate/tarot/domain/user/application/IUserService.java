@@ -13,4 +13,6 @@ public interface IUserService {
     void validateVerificationTokenAndActivateUser(String token) throws Exception;
 
     void activateUser(VerificationToken verificationToken);
+
+    void deleteUserWithTokens(Long userId);
 }

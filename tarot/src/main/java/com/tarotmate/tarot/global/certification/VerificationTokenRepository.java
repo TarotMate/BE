@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 public interface VerificationTokenRepository extends JpaRepository<VerificationToken, Long> {
     VerificationToken findByToken(String token);
-    VerificationToken findByUser(User user);
     @Modifying @Query("delete from VerificationToken t where t.expiryDate<=?1")
     void deleteAllExpiredTokens(LocalDateTime now);
+    void deleteByUserId(Long userId);
 }
