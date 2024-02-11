@@ -52,7 +52,10 @@ public class UserService implements IUserService {
     public void validateVerificationTokenAndActivateUser(final String token) {
         final VerificationToken verificationToken = tokenRepository.findByToken(token);
         if (Objects.isNull(verificationToken)) throw new Exception404(ErrorCode.ER13.getCode());
-        if (verificationToken.isExpired()) throw new Exception401(ErrorCode.ER15.getCode());
+        if (verificationToken.isExpired()) {
+            tokenRepository.delete(verificationToken);
+            throw new Exception401(ErrorCode.ER15.getCode());
+        }
         activateUser(verificationToken);
     }
 
