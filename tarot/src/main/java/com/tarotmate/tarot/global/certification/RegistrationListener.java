@@ -36,7 +36,7 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
 
         final String recipientAddress = user.getEmail();
         final String subject = "Registration Confirmation";
-        final String confirmationUrl = "http://localhost:8080" + event.getAppUrl() + "/regitrationConfirm?token=" + token;
+        final String confirmationUrl = "https://api.tarotmate.kr" + event.getAppUrl() + "/regitrationConfirm?token=" + token;
         final String message = messages.getMessage("message.regSucc", null, event.getLocale());
 
         final MimeMessage email = mailSender.createMimeMessage();
